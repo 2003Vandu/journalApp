@@ -1,0 +1,76 @@
+# Start Zookeeper
+zookeeper-server-start.bat ..\..\config\zookeeper.properties
+
+# Start Kafka Broker
+kafka-server-start.bat ..\..\config\server.properties
+
+# Create topic for journal entries
+kafka-topics.bat --create --topic journal-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+
+# Send messages with key-value format
+kafka-console-producer.bat --broker-list localhost:9092 --topic journal-topic --property "key.separator=-" --property "parse.key=true"
+
+# Consume messages (optional: show keys)
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic journal-topic --from-beginning --property "key.separator=-" --property "print.key=true"
+
+# to check topic list
+kafka-topics.bat --list --bootstrap-server localhost:9092
+
+** yml
+spring.kafka.bootstrap-servers=localhost:9092
+spring.kafka.consumer.group-id=journal-group
+spring.kafka.consumer.auto-offset-reset=earliest
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
+
+
+
+
+
+Weather.api.key: ***************************
+
+spring:
+  data:
+   mongodb:
+     uri: mongodb+srv://**************2003_db_user:*****************@cluster0.rrkt07o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+     database: journaldb
+     auto-index-creation: true
+   redis:
+      host: redis-10555.c212.ap-south-1-1.ec2.cloud.redislabs.com
+      port: 10555
+      username: default
+      password: *********************************
+  mail:
+    host: smtp.gmail.com
+    port: 535
+    username: patilvandesh301@gmail.com
+    password: "********************"
+    properties:
+     mail:
+       smtp:
+         auth: true
+         starttls:
+           enable: true
+  ##new added
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+      group-id: journal-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+server:
+  port: 8080
+
+logging:
+  level:
+    net:
+     selfproject:
+      journalAPP: DEBUG
+

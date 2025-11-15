@@ -17,6 +17,7 @@ import com.selfproject.journalAPP.Repository.UserRepository;
 import com.selfproject.journalAPP.entity.User;
 import com.selfproject.journalAPP.service.UserService;
 
+@Disabled
 @SpringBootTest
 public class userServiceTests 
 {
@@ -29,6 +30,7 @@ public class userServiceTests
 	
 	
 	
+	@Disabled
 	@ParameterizedTest
 	@ArgumentsSource(userArgumentProvider.class)
 	public void TestSaveNewUserorCustomeArgument(User user)

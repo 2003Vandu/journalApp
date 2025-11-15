@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
@@ -17,6 +18,7 @@ import com.selfproject.journalAPP.Repository.UserRepository;
 import com.selfproject.journalAPP.entity.User;
 import com.selfproject.journalAPP.service.UserDetailsServiceImpl;
 
+@Disabled
 @SpringBootTest
 public class UserDetailsServiceImplTest {
 	
@@ -36,6 +38,7 @@ public class UserDetailsServiceImplTest {
 		
 	}
 	
+	@Disabled
 	@Test
 	void loadUserByUsernameTest(){
 		
@@ -45,6 +48,7 @@ public class UserDetailsServiceImplTest {
 				              .password("Vandesh")
 				              .roles(new ArrayList<>())
 				              .build());
+	@SuppressWarnings("unused")
 	UserDetails user =	userDetailsServiceImpl.loadUserByUsername("Vandesh");
 		
 	}

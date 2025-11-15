@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.selfproject.journalAPP.Repository.JournalEntryRepository;
@@ -16,7 +16,7 @@ import com.selfproject.journalAPP.entity.User;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component
+@Service
 @Slf4j
 public class JournalEntryService {
 	
@@ -27,6 +27,7 @@ public class JournalEntryService {
 	private UserService userService;
 	
 	
+	@SuppressWarnings("unused")
 	private static final Logger logger = org.slf4j.LoggerFactory.getLogger(JournalEntryService.class);
 	
 	@Transactional

@@ -3,14 +3,12 @@ package com.selfproject.journalAPP.controller;
 
 
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.selfproject.journalAPP.JournalApplication;
 import com.selfproject.journalAPP.entity.JournalEntry;
 import com.selfproject.journalAPP.entity.User;
@@ -33,7 +32,8 @@ import com.selfproject.journalAPP.service.UserService;
 @RequestMapping("/journal")
 public class JournalEntryControllerv2 {
 
-    private final JournalApplication journalApplication;
+    @SuppressWarnings("unused")
+	private final JournalApplication journalApplication;
 	
 	
 	@Autowired
@@ -47,22 +47,7 @@ public class JournalEntryControllerv2 {
         this.journalApplication = journalApplication;
     }
 	
-	
-	
-//	@GetMapping()
-//	public ResponseEntity<?> getall()
-//	{
-//		
-//		List<JournalEntry> allEntries = journalEntryService.getall();
-//		
-//		if (allEntries.isEmpty()) {
-//	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//	    }
-//
-//	    return new ResponseEntity<>(allEntries, HttpStatus.OK);
-//
-//	}
-//	
+
 	@GetMapping
 	public ResponseEntity<?> getAllJoyrnalEntriesOFUSer()
 	{
@@ -81,7 +66,7 @@ public class JournalEntryControllerv2 {
 
 	}
 	
-	
+
 	@PostMapping
 	public ResponseEntity<?> createEntry(@RequestBody JournalEntry myEntry) {
 	    try {

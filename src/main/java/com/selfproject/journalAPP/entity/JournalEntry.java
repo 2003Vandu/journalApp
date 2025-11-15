@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
+import com.selfproject.journalAPP.Enums.Sentiment;
 
 // also called as plane old java object 
 
@@ -17,17 +18,24 @@ import com.mongodb.lang.NonNull;
 //@Getter
 //@Setter
 //@Data
-public class JournalEntry 
+public class JournalEntry
 {
 	@Id
 	private ObjectId id; 
     
 	@NonNull
 	private String title;
-	
 	private String contact;
-	
-	private LocalDateTime date;
+	private LocalDateTime date; 
+	private Sentiment sentiment;
+
+	public Sentiment getSentiment() {
+		return sentiment;
+	}
+
+	public void setSentiment(Sentiment sentement) {
+		this.sentiment = sentement;
+	}
 
 	public ObjectId getId() {
 		return id;
