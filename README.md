@@ -2,7 +2,7 @@
 
 A **cloud-connected journaling backend** built with **Spring Boot 2.7** and **Java 17**, integrated with **MongoDB Atlas** and **Redis caching**, designed for real-world performance and scalability.
 
-[![Live Demo](https://img.shields.io/badge/LIVE-DEMO-brightgreen?style=for-the-badge)](https://journal-app-github.onrender.com)
+##[![Live Demo](https://img.shields.io/badge/LIVE-DEMO-brightgreen?style=for-the-badge)](https://journal-app-github.onrender.com)
 
 ---
 
@@ -24,7 +24,7 @@ The system is optimized for **speed, reliability, and real-time data consistency
 | 🔐 **Security** | Spring Security (Basic Auth, RBA) |
 | 📧 **Mail & Automation** | Spring Mail, Spring Scheduler |
 | 🧪 **Testing** | JUnit 5, Mockito |
-| 🧹 **Code Quality** | SonarQube, SonarCloud |
+| 🧹 **Code Quality** | SonarQube, SonarLint |
 | ☁️ **Deployment** | Render Cloud |
 | 🧰 **Tools** | IntelliJ IDEA, Postman, Maven, Git |
 
@@ -88,31 +88,11 @@ Handles all **data persistence operations**.
 | 📧 **Mail Service** | Configured SMTP for automated email notifications |
 | 🧪 **Testing** | JUnit 5 + Mockito for service-level tests |
 | 🪵 **Logging** | SLF4J-based rolling logs for console & file |
-| 🧹 **Code Quality** | SonarCloud CI integrated for continuous inspection |
+| 🧹 **Code Quality** | SonarLint CI integrated for continuous inspection |
 | ⚙️ **Profiles** | `application.yml` with `dev` & `prod` environment separation |
-| ☁️ **Deployment** | Dockerized and deployed live on Render |
 
 ---
 
-## ⚡ Performance Metrics
-
-| Metric | Before | After Optimization | Improvement |
-|:--------|:--------|:------------------|:-------------|
-| API Latency | ~2–3 sec | ~10 ms | **>99% faster** |
-| DB Load | Every request | Cached responses | **80% reduced** |
-| Uptime | — | 100% post-deployment | ✅ Stable |
-| Build Size | 300MB | 120MB (multi-stage) | 🔻 ~60% smaller |
-
----
-
-## 🌍 Deployment Details
-
-- **Live URL:** [https://journal-app-github.onrender.com](https://journal-app-github.onrender.com)
-- **Port:** 8080 (configured via `PORT` environment variable)
-- **Deployment Type:** Multi-stage Docker build
-- **Base Image:** `eclipse-temurin:17-jdk-alpine`
-- **Environment Profiles:** `dev` (local) and `prod` (Render)
-- **CI/CD:** GitHub → Render → Live
 
 ✅ **All APIs tested and verified via Postman (live production tests passed)**
 
@@ -144,10 +124,9 @@ Handles all **data persistence operations**.
 
 | Area | Skill Demonstrated | Real-World Relevance |
 |:------|:------------------|:---------------------|
-| Cloud Integration | MongoDB Atlas, Redis Cloud | Backend scalability |
+| Cloud Integration | MongoDB Atlas, Redis Cloud |
 | Optimization | Redis caching | Performance tuning |
 | Security | Role-based auth | Enterprise-grade access control |
-| CI/CD | SonarCloud, Docker, Render | Deployment pipelines |
 | Maintainability | Clean architecture | Production structure |
 
 ---
@@ -155,9 +134,9 @@ Handles all **data persistence operations**.
 ## 🧾 Author
 
 **👤 Shantanu Deshmukh**  
-🎯 *Java Backend Developer | B.Tech IT 2025*  
-📧 [shantanudofficial5@gmail.com](mailto:shantanudofficial5@gmail.com)  
-🔗 [GitHub – GitbyShantanu](https://github.com/GitbyShantanu)
+🎯 *Java Backend Developer | B.Tech Automation & Robotic 2025*  
+📧 [vandesghodke2003@hmail.com](mailto:vandesghodke2003@hmail.com)  
+🔗 [GitHub – 2003Vandu]((https://github.com/2003Vandu))
 
 ---
 
