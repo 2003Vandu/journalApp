@@ -1,0 +1,65 @@
+Weather.api.key: ${WEATHER_API_KEY}
+SECRET.KEY: ${APP_SECRET_KEY}
+
+spring:
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI}
+      database: ${SPRING_DATA_MONGODB_DATABASE}
+      auto-index-creation: true
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST}
+      port: ${SPRING_DATA_REDIS_PORT}
+      username: default
+      password: ${SPRING_DATA_REDIS_PASSWORD}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  springdoc:
+    api-docs:
+      enabled: true
+    swagger-ui:
+      enabled: true
+      path: /swagger-ui.html
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+
+  kafka:
+    # IMPORTANT: The value for this variable MUST be the host and port of your cloud-hosted Kafka broker (e.g., from Confluent Cloud), NOT localhost.
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      auto-offset-reset: earliest
+      group-id: journal-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.kafka.support.serializer.JsonDeserializer
+      allow-auto-create-topics: false
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.selfproject.journalAPP.model
+
+server:
+  port: 8080
+
+logging:
+  level:
+    net:
+      selfproject:
+        journalAPP: DEBUG

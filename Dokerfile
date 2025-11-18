@@ -1,0 +1,34 @@
+# Stage 1: Build the application
+# Use JDK 17, matching the java.version in your pom.xml, for compilation and packaging
+FROM openjdk:17-jdk AS build
+WORKDIR /app
+
+# Copy Maven wrapper and configuration first
+COPY mvnw .
+COPY .mvn .mvn
+
+# Copy project definition (pom.xml) and source code
+COPY pom.xml .
+COPY src src
+
+# Set execution permission and run the Maven build
+# -DskipTests ensures faster build, assuming tests are run separately in CI
+RUN chmod +x ./mvnw
+RUN ./mvnw clean package -DskipTests
+
+# Stage 2: Create the final, minimal runtime image
+# Using the same JDK 17 version for stability, but only deploying the JAR
+FROM openjdk:17-jdk
+# VOLUME /tmp allows the application to write logs or temporary data
+VOLUME /tmp
+
+# Copy the generated JAR file from the build stage
+# The name pattern *.jar is safer than assuming a fixed name
+COPY --from=build /app/target/*.jar app.jar
+
+# Define the entry point to run the Spring Boot application
+# The "-jar" argument tells the JVM to execute the JAR file
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+# Expose the application port (must match server.port: 8080 in your YAML)
+EXPOSE 8080

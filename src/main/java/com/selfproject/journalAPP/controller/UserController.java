@@ -1,5 +1,6 @@
 package com.selfproject.journalAPP.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import com.selfproject.journalAPP.service.weatherService;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name ="User Apis", description = "Read ,Update, delete, user")
 public class UserController 
 {
 

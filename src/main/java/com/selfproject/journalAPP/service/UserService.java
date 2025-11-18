@@ -30,10 +30,10 @@ public class UserService {
 		try {
 			user.setPassword(passwordEncode.encode(user.getPassword()));
 			user.setRoles(Arrays.asList("USER"));
-			userRepository.save(user); 
-			
+			userRepository.save(user);
 			return true;
 		} catch (Exception e) {
+
 			log.error("Error occure creating duplicate {} : ",user.getUserName(),e);
 //			log.warn("Not possible to creat again ");
 //			log.info("user name Already exist");

@@ -12,8 +12,10 @@ target/
 .settings
 .springBeans
 .sts4-cache
+!src/main/resources/application-prod.yml
 *.yml
 *.log
+*.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -36,4 +38,6 @@ build/
 # Specific config and log files
 src/main/resources/application.properties
 src/main/resources/log.xml
+src/main/resources/static/kafka.txt
+
 

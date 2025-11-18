@@ -1,12 +1,11 @@
 package com.selfproject.journalAPP.controller;
 
-
-
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +29,7 @@ import com.selfproject.journalAPP.service.UserService;
 
 @RestController
 @RequestMapping("/journal")
+@Tag(name ="Journal Data APIS", description = "Read ,Update, delete, user journals")
 public class JournalEntryControllerv2 {
 
     @SuppressWarnings("unused")
@@ -49,6 +49,7 @@ public class JournalEntryControllerv2 {
 	
 
 	@GetMapping
+    @Operation(summary = "Get all journal Entries of user")
 	public ResponseEntity<?> getAllJoyrnalEntriesOFUSer()
 	{
 		
@@ -68,6 +69,7 @@ public class JournalEntryControllerv2 {
 	
 
 	@PostMapping
+    @Operation(summary = "Create journal Entrie of user")
 	public ResponseEntity<?> createEntry(@RequestBody JournalEntry myEntry) {
 	    try {
 	    	
@@ -83,32 +85,36 @@ public class JournalEntryControllerv2 {
 	    }
 	}
 
-	
+	// change for swagger
 	@GetMapping("id/{myId}")
-	public ResponseEntity<JournalEntry> getJournalEntryByid(@PathVariable ObjectId myId) {
-		
-		
+    @Operation(summary = "Get  journal Entries of user By ID")
+	public ResponseEntity<JournalEntry> getJournalEntryByid(@PathVariable String myId) {
+
+        ObjectId objectId = new ObjectId(myId);
 	    org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    String userName = authentication.getName();
-	    
+
 	    User user = userService.findByuserName(userName);
-	    List<JournalEntry> collect = user.getJournalEntries()  
+	    List<JournalEntry> collect = user.getJournalEntries()
 	                            .stream()
-	                            .filter(x -> x.getId().equals(myId))
+                                                      //change is  this <objectId>
+	                            .filter(x -> x.getId().equals(objectId))
 	                            .collect(Collectors.toList());
-	    
+
 	    if(!collect.isEmpty())
 	    {
-	    	Optional<JournalEntry> journalEntry =journalEntryService.findByID(myId);
+            //change is  this <objectId>
+	    	Optional<JournalEntry> journalEntry =journalEntryService.findByID(objectId);
 	    	if(journalEntry.isPresent())
 			 {
 				 return new ResponseEntity<>(journalEntry.get(),HttpStatus.OK);
 			 }
-	    	
+
 	    }
 		 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		
+
 		}
+
 	
 	/*
 	 * cascading delete  {@DeleteMapping("id/{myId}")}  if we just use to delete this means only id jouralEntry get delete but not in User collection 
@@ -117,6 +123,7 @@ public class JournalEntryControllerv2 {
 	 *
 	 * */
 	@DeleteMapping("id/{myId}")
+    @Operation(summary = "Delete  journal Entries of user By ID")
 	public ResponseEntity<?> deleteJournalEntryByid(@PathVariable ObjectId myId) {
 		
 		org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -133,6 +140,7 @@ public class JournalEntryControllerv2 {
 	}
 	
 	@PutMapping("id/{myId}")
+    @Operation(summary = "update journal Entries of user By ID")
     public ResponseEntity<?> updatEntryByid(@PathVariable ObjectId myId,@RequestBody JournalEntry newEntry) {
 		
 		org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -174,4 +182,67 @@ public class JournalEntryControllerv2 {
 	
 }
 
+// og mapping by id
+/*
+       @GetMapping("id/{myId}")
+      @Operation(summary = "Get  journal Entries of user By ID")
+  	public ResponseEntity<JournalEntry> getJournalEntryByid(@PathVariable ObjectId myId) {
+
+
+  	    org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  	    String userName = authentication.getName();
+
+  	    User user = userService.findByuserName(userName);
+  	    List<JournalEntry> collect = user.getJournalEntries()
+  	                            .stream()
+  	                            .filter(x -> x.getId().equals(myId))
+  	                            .collect(Collectors.toList());
+
+  	    if(!collect.isEmpty())
+  	            {
+  	    	Optional<JournalEntry> journalEntry =journalEntryService.findByID(myId);
+	    	if(journalEntry.isPresent())
+			 {
+				 return new ResponseEntity<>(journalEntry.get(),HttpStatus.OK);
+			 }
+
+  	    }
+   		 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+ 		}
+ */
+
+/*
+* // change for swagger
+	@GetMapping("id/{myId}")
+    @Operation(summary = "Get  journal Entries of user By ID")
+	public ResponseEntity<JournalEntry> getJournalEntryByid(@PathVariable String myId) {
+
+        ObjectId objectId = new ObjectId(myId);
+
+
+	    org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String userName = authentication.getName();
+
+	    User user = userService.findByuserName(userName);
+	    List<JournalEntry> collect = user.getJournalEntries()
+	                            .stream()
+                //change is  this <objectId>
+	                            .filter(x -> x.getId().equals(objectId))
+	                            .collect(Collectors.toList());
+
+	    if(!collect.isEmpty())
+	    {
+            //change is  this <objectId>
+	    	Optional<JournalEntry> journalEntry =journalEntryService.findByID(objectId);
+	    	if(journalEntry.isPresent())
+			 {
+				 return new ResponseEntity<>(journalEntry.get(),HttpStatus.OK);
+			 }
+
+	    }
+		 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+		}
+* */
 

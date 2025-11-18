@@ -2,6 +2,7 @@ package com.selfproject.journalAPP.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import com.selfproject.journalAPP.service.UserService;
 
 @RestController
 @RequestMapping("/admin")
+@Tag(name ="Admin Api", description = "Admin can create A user with rolse Both User, Admin")
 public class AdminController 
 {
 	@Autowired

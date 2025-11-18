@@ -1,6 +1,7 @@
 package com.selfproject.journalAPP.controller;
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import com.selfproject.journalAPP.Utilis.JwtUtils;
 @RestController 
 @RequestMapping("/public")
 @Slf4j
+@Tag(name ="Public controller", description = "sinup, login , Healthcheck")
 class PublicController 
 {
 
@@ -39,16 +41,30 @@ class PublicController
 		return "Journal APP is running ";
 	}
    
-	@PostMapping("/create-user")
-	public void createUser(@RequestBody User user)
-	{
-		userService.saveNewUser(user);
-	}
+//	@PostMapping("/create-user")
+//	public void createUser(@RequestBody User user)
+//	{
+//		userService.saveNewUser(user);
+//	}
 
+
+    // og use
+//    @PostMapping("/Signup")
+//    public void Signup(@RequestBody User user)
+//    {
+//        userService.saveNewUser(user);
+//    }
+
+    // dummy use
     @PostMapping("/Signup")
-    public void Signup(@RequestBody User user)
+    public void Signup(@RequestBody com.selfproject.journalAPP.DTO.UserDTO user)
     {
-        userService.saveNewUser(user);
+        User newUser = new User();
+        newUser.setEmail(user.getEmail());
+        newUser.setUserName(user.getUserName());
+        newUser.setPassword(user.getPassword());
+        newUser.setSentimentalAnalysis(user.isSentimentalAnalysis());
+        userService.saveNewUser(newUser);
     }
 
     @PostMapping("/login")
