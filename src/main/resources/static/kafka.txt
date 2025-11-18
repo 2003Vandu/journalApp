@@ -1,0 +1,9 @@
+Swagger-link
+
+http://localhost:8080/swagger-ui/index.html#/
+
+// to creat a our oauth2 app regester on google
+https://console.cloud.google.com/auth/clients/58796278300-0ukjurm27dfrvnoc4tkhhdtdevgcennm.apps.googleusercontent.com?project=journalapp-478417
+
+// act as a front end for our journal app backend
+https://developers.google.com/oauthplayground/
