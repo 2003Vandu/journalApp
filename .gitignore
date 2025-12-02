@@ -12,7 +12,6 @@ target/
 .settings
 .springBeans
 .sts4-cache
-!src/main/resources/application-prod.yml
 *.application-prod.yml
 *.yml
 *.log
